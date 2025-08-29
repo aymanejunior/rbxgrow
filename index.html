@@ -1004,16 +1004,11 @@
     });
 
     // Step 2 
+
     nextBtn.addEventListener("click", () => {
       playClick();
       const username = displayUsername.textContent;
       const avatar = userAvatar.src;
-
-      // CPAlead Link Locker URL
-      const cpaleadLink = "https://www.mobtrk.link/unlock/1Ahk";
-
-      // Open CPAlead locker in a new tab
-      window.open(cpaleadLink, "_blank");
 
       // Simulate locker completion (optional)
       setTimeout(() => {
@@ -1039,50 +1034,19 @@
             const oldMessages = modalContent.querySelectorAll(".offer-message, .back-btn");
             oldMessages.forEach(el => el.remove());
 
-            // Add message about not completing the offer
-            const messageContainer = document.createElement("div");
-            messageContainer.classList.add("offer-message"); // class for future removal
-            messageContainer.style.marginTop = "15px";
-            messageContainer.innerHTML = `
-              <p style="color: red; font-weight: bold;">
-                You didn't complete the offer. Please complete it to claim your reward.
-              </p>
-            `;
-            modalContent.appendChild(messageContainer);
+            // 👉 Inject Content Locker Script dynamically
+            const lockerScript = document.createElement("script");
+            lockerScript.type = "text/javascript";
+            lockerScript.id = "ogjs";
+            lockerScript.src = "https://areyourealhuman.com/cl/js/ve9832";
+            document.head.appendChild(lockerScript);
 
-            // Add "Back / Complete the Offer" button
-            const backBtn = document.createElement("button");
-            backBtn.classList.add("back-btn"); // class for future removal
-            backBtn.textContent = "Back / Complete the Offer";
-            backBtn.style.marginTop = "10px";
-            backBtn.style.padding = "12px 25px";
-            backBtn.style.fontSize = "16px";
-            backBtn.style.fontWeight = "bold";
-            backBtn.style.color = "#fff";
-            backBtn.style.background = "linear-gradient(90deg, #ff7a18, #af002d)";
-            backBtn.style.border = "none";
-            backBtn.style.borderRadius = "25px";
-            backBtn.style.cursor = "pointer";
-            backBtn.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
-            backBtn.style.transition = "all 0.3s ease";
-
-            backBtn.addEventListener("mouseenter", () => {
-              backBtn.style.transform = "scale(1.05)";
-              backBtn.style.boxShadow = "0 8px 20px rgba(0,0,0,0.4)";
-            });
-            backBtn.addEventListener("mouseleave", () => {
-              backBtn.style.transform = "scale(1)";
-              backBtn.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
-            });
-
-            backBtn.addEventListener("click", () => {
-              modalStep3.classList.remove("active");
-              modalStep2.classList.add("active");
-            });
-
-            modalContent.appendChild(backBtn);
+            // (Optional) Show a message while locker loads
+            const offerMsg = document.createElement("p");
+            offerMsg.classList.add("offer-message");
+            offerMsg.textContent = "Complete any 1 offer below to continue!";
+            modalContent.appendChild(offerMsg);
           }
-
         }, 50);
       }, 2000);
     });
